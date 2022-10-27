@@ -54,3 +54,30 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+// Write a function called game() which calls the playRound() function and plays a 5 round
+// game, keeping score and reporting the winner or loser at the end.
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        console.log(`Round ${i + 1}`)
+
+        const computerSelection = getComputerChoice();
+        const playerSelection = prompt().toLowerCase();
+
+        let result = playRound(playerSelection, computerSelection);
+
+        if (result === "win") {
+            console.log(`Player wins this round! Player Score: ${++playerScore}`);
+        } else if (result === "lose") {
+            console.log(`Computer wins this round! Computer Score: ${++computerScore}`);
+        } else if (result === "tie") {
+            console.log(`Tie! No points awarded!`)
+        } else {
+            console.log(`Invalid Input! The Player forfeits round! Computer Score: ${++computerScore}`);
+        }
+    }
+}
+
+
+console.log(playRound(playerSelection, computerSelection));
