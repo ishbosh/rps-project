@@ -102,6 +102,7 @@ function getWinner(playerScore, computerScore) {
 // Recursively break ties until a winner is decided, then return the winner.
 function tieBreaker() {
     console.log(`It's a tie! Tie-breaker round!`);
+    alert(`It's a tie! Tie-breaker round!`);
     
     const computerSelection = getComputerChoice();
     const playerSelection = prompt().toLowerCase();    
@@ -114,6 +115,7 @@ function tieBreaker() {
         return "Computer wins!";
     } else {
         console.log(`Another tie!`);
+        alert(`Another tie!`);
         tieBreaker();
     }
 }
