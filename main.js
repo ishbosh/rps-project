@@ -63,7 +63,13 @@ function game() {
         console.log(`\nRound ${i + 1}:`)
 
         const computerSelection = getComputerChoice();
-        const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors.").toLowerCase();
+        const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors.");
+        if (playerSelection === null) {
+            console.log("Player forfeits game!");
+            return;
+        } else {
+            playerSelection = playerSelection.toLowerCase();
+        }
 
         let result = playRound(playerSelection, computerSelection);
 
@@ -95,7 +101,8 @@ function getWinner(playerScore, computerScore) {
         return "Computer wins!";
     } else {
         // Tie breaker
-        return tieBreaker();
+        tieWinner = tieBreaker();
+        return tieWinner;
     }
 }
 
@@ -105,7 +112,12 @@ function tieBreaker() {
     alert(`It's a tie! Tie-breaker round!`);
     
     const computerSelection = getComputerChoice();
-    const playerSelection = prompt().toLowerCase();    
+    const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors."); 
+    if (playerSelection === null) {
+        return "Player forfeits! Computer wins!";
+    } else {
+        playerSelection = playerSelection.toLowerCase();
+    }
 
     let result = playRound(playerSelection, computerSelection);
 
@@ -113,10 +125,12 @@ function tieBreaker() {
         return "Player Wins!";
     } else if (result === "lose") {
         return "Computer wins!";
-    } else {
+    } else if (result === "tie") {
         console.log(`Another tie!`);
         alert(`Another tie!`);
         tieBreaker();
+    } else {
+        return "Invalid player input! Computer wins!";
     }
 }
 
