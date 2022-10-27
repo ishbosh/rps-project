@@ -114,4 +114,4 @@ function tieBreaker() {
     }
 }
 
-console.log(playRound(playerSelection, computerSelection));
+game();
