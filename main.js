@@ -77,6 +77,10 @@ function game() {
             console.log(`Invalid Input! The Player forfeits round! Computer Score: ${++computerScore}`);
         }
     }
+
+    // Declare who the winner is
+    console.log(getWinner());
+    
 }
 
 // Function that will take two scores as input and return which is the winner
