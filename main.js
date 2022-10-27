@@ -74,10 +74,11 @@ function game() {
             console.log(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
             alert(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
         } else if (result === "tie") {
-            console.log(`Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`)
-            alert(`Tie! No points awarded! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`)
+            console.log(`Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
+            alert(`Tie! No points awarded! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
         } else {
             console.log(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
+            alert(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
         }
     }
 
@@ -117,5 +118,5 @@ function tieBreaker() {
     }
 }
 
-alert("Welcome to Rock Paper Scissors.\n Open the console to see full game results.")
+alert("Welcome to Rock Paper Scissors.\n Open the console to see full game results.");
 game();
