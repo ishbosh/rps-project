@@ -63,7 +63,7 @@ function game() {
         console.log(`\nRound ${i + 1}:`)
 
         const computerSelection = getComputerChoice();
-        const playerSelection = prompt().toLowerCase();
+        const playerSelection = prompt("Choose Your Weapon: Rock, Paper, or Scissors.").toLowerCase();
 
         let result = playRound(playerSelection, computerSelection);
 
