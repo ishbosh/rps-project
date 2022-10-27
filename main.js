@@ -26,30 +26,30 @@ function playRound(playerSelection, computerSelection) {
     switch (playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
-                return "You win! Rock beats Scissors!";
+                return "win";
             } else if (computerSelection === "paper") {
-                return "You lose! Paper beats Rock!";
+                return "lose";
             } else {
-                return "Tie! Both chose Rock!";
+                return "tie";
             }
         case "paper":
             if (computerSelection === "rock") {
-                return "You win! Paper beats Rock!";
+                return "win";
             } else if (computerSelection === "scissors") {
-                return "You lose! Scissors beats Paper!";
+                return "lose";
             } else {
-                return "Tie! Both chose Paper!";
+                return "tie";
             }
         case "scissors":
             if (computerSelection === "paper") {
-                return "You win! Scissors beats Paper!";
+                return "win";
             } else if (computerSelection === "rock") {
-                return "You lose! Rock beats Scissors!";
+                return "lose";
             } else {
-                return "Tie! Both chose Scissors!";
+                return "tie";
             }
         default:
-            return "Player Forfeits! Please input Rock, Paper, or Scissors next time!";
+            return "invalid player input";
     }
 
 }
@@ -95,6 +95,7 @@ function getWinner(playerScore, computerScore) {
     }
 }
 
+// Recursively break ties until a winner is decided, then return the winner.
 function tieBreaker() {
     console.log(`It's a tie! Tie-breaker round!`);
     
