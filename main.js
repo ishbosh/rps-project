@@ -79,5 +79,15 @@ function game() {
     }
 }
 
+// Function that will take two scores as input and return which is the winner
+function getWinner(playerScore, computerScore) {
+    if (playerScore > computerScore) {
+        return "Player wins!";
+    } else if (playerScore < computerScore) {
+        return "Computer wins!";
+    } else {
+        // Tie breaker
+    }
+}
 
 console.log(playRound(playerSelection, computerSelection));
