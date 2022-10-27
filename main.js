@@ -60,7 +60,7 @@ function game() {
     let playerScore = 0;
     let computerScore = 0;
     for (let i = 0; i < 5; i++) {
-        console.log(`Round ${i + 1}`)
+        console.log(`\nRound ${i + 1}:`)
 
         const computerSelection = getComputerChoice();
         const playerSelection = prompt().toLowerCase();
@@ -68,13 +68,13 @@ function game() {
         let result = playRound(playerSelection, computerSelection);
 
         if (result === "win") {
-            console.log(`Player wins this round! Player Score: ${++playerScore}`);
+            console.log(`Player wins this round! Player Score: ${++playerScore} | Computer Score: ${computerScore}`);
         } else if (result === "lose") {
-            console.log(`Computer wins this round! Computer Score: ${++computerScore}`);
+            console.log(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
         } else if (result === "tie") {
             console.log(`Tie! No points awarded!`)
         } else {
-            console.log(`Invalid Input! The Player forfeits round! Computer Score: ${++computerScore}`);
+            console.log(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
         }
     }
 
