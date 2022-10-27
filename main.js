@@ -78,7 +78,7 @@ function game() {
             alert(`Tie! No points awarded! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
         } else {
             console.log(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
-            alert(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
+            alert(`Invalid Input! The Player forfeits round! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
         }
     }
 
