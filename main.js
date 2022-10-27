@@ -63,16 +63,19 @@ function game() {
         console.log(`\nRound ${i + 1}:`)
 
         const computerSelection = getComputerChoice();
-        const playerSelection = prompt("Choose Your Weapon: Rock, Paper, or Scissors.").toLowerCase();
+        const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors.").toLowerCase();
 
         let result = playRound(playerSelection, computerSelection);
 
         if (result === "win") {
             console.log(`Player wins this round! Player Score: ${++playerScore} | Computer Score: ${computerScore}`);
+            alert(`Player wins this round! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
         } else if (result === "lose") {
             console.log(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
+            alert(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
         } else if (result === "tie") {
-            console.log(`Tie! No points awarded!`)
+            console.log(`Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`)
+            alert(`Tie! No points awarded! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`)
         } else {
             console.log(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
         }
@@ -114,4 +117,5 @@ function tieBreaker() {
     }
 }
 
+alert("Welcome to Rock Paper Scissors.\n Open the console to see full game results.")
 game();
