@@ -79,7 +79,7 @@ function game() {
     }
 
     // Declare who the winner is
-    console.log(getWinner());
+    console.log(getWinner(playerScore, computerScore));
     
 }
 
