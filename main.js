@@ -91,6 +91,25 @@ function getWinner(playerScore, computerScore) {
         return "Computer wins!";
     } else {
         // Tie breaker
+        return tieBreaker();
+    }
+}
+
+function tieBreaker() {
+    console.log(`It's a tie! Tie-breaker round!`);
+    
+    const computerSelection = getComputerChoice();
+    const playerSelection = prompt().toLowerCase();    
+
+    let result = playRound(playerSelection, computerSelection);
+
+    if (result === "win") {
+        return "Player Wins!";
+    } else if (result === "lose") {
+        return "Computer wins!";
+    } else {
+        console.log(`Another tie!`);
+        tieBreaker();
     }
 }
 
