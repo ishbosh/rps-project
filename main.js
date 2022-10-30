@@ -1,3 +1,7 @@
+const gameWinner = document.querySelector('#winner');
+const results = document.querySelector('#results');
+const choices = document.querySelector('#choices');
+
 function player(playerName, playerScore) {
     this.name = playerName;
     this.score = playerScore;
@@ -28,41 +32,54 @@ function getComputerChoice() {
 function playRound(playerSelection) {
    
     let computerSelection = getComputerChoice();
-    console.log("Computer Choice: " + computerSelection);
-    console.log(`Player Choice: ${playerSelection}`);
-
+    let roundResult;
     
+    choices.querySelector('#computerChoice').textContent = `Computer Chose: ${computerSelection}`;
+    choices.querySelector('#playerChoice').textContent = `Player Chose: ${playerSelection}`;
+
     switch (playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
                 addScore(humanPlayer);
-                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "paper") {
                 addScore(computerPlayer);
-                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
+            break;
         case "paper":
             if (computerSelection === "rock") {
                 addScore(humanPlayer);
-                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "scissors") {
                 addScore(computerPlayer);
-                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
+            break;
         case "scissors":
             if (computerSelection === "paper") {
                 addScore(humanPlayer);
-                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "rock") {
                 addScore(computerPlayer);
-                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
+            break;
+    }
+
+    results.textContent = roundResult;
+    gameWinner.textContent = '';
+    
+    if (humanPlayer.score == 5 || computerPlayer.score == 5){
+        gameWinner.textContent = getWinner(humanPlayer.score, computerPlayer.score);
+        humanPlayer.score = 0;
+        computerPlayer.score = 0;
     }
 }
 
@@ -70,13 +87,10 @@ function playRound(playerSelection) {
 // game, keeping score and reporting the winner or loser at the end.
 function game() {
 
-    let roundResult = "Make a selection to start the game";
+    let gameStartText = "Make a selection to start the game";
     let playerSelection;
 
-    const gameWinner = document.querySelector('#winner');
-    const results = document.querySelector('#results');
-    results.textContent = roundResult;
-
+    results.textContent = gameStartText;
 
     // When Player clicks button
     const buttons = document.querySelectorAll('button');
@@ -84,17 +98,7 @@ function game() {
         button.addEventListener('click', function(e){
             playerSelection = e.target.id;
             
-            roundResult = playRound(playerSelection);
-
-            results.textContent = roundResult;
-            gameWinner.textContent = '';
-            
-            if (humanPlayer.score == 5 || computerPlayer.score == 5){
-                gameWinner.textContent = getWinner(humanPlayer.score, computerPlayer.score);
-                humanPlayer.score = 0;
-                computerPlayer.score = 0;
-            }
-
+            playRound(playerSelection);
         });
     });
     
