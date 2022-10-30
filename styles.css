@@ -1,0 +1,30 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100%;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+button {
+    width: 100px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 20px 0;
+}
+
+#choices {
+    margin-bottom: 50px;
+}
