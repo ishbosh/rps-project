@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex-direction: column;
 }
 
 
@@ -10,6 +11,12 @@ button {
     width: 100px;
     padding: 10px;
     font-size: 20px;
+}
+
+.header {
+    display: flex;
+    font-size: 32px;
+    align-items: flex-end;
 }
 
 .game-container {
@@ -31,5 +38,5 @@ button {
 
 #main-image {
     align-self: flex-start;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 }

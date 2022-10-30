@@ -7,18 +7,17 @@
         <script src="main.js" defer></script>
     </head>
     <body>
-        <div class="container">
+        <div class="header">
+            <div>Player Score: <span id="player-score">0</span></div>
             <div id="main-image">
                 <img src="images/rock-paper-scissors-game.png">
             </div>
+            <div>Computer Score: <span id="computer-score">0</span></div>
+        </div>
+        <div class="container">
 
-            <div id="choices">
-                <p>Choose your weapon...</p>
-                <div id="computerChoice"></div>
-                <div id="playerChoice"></div>
-            </div>
             <div class="game-container">
-    
+                
                 <div id="results"></div>
                 
                 <div class="button-container">
@@ -26,8 +25,13 @@
                     <button id="paper">Paper</button>
                     <button id="scissors">Scissors</button>
                 </div>
-        
+                
                 <div id="winner"></div>
+            </div>
+            <div id="choices">
+                <p>Choose your weapon...</p>
+                <div id="computerChoice"></div>
+                <div id="playerChoice"></div>
             </div>
         </div>
 

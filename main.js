@@ -1,6 +1,9 @@
+// Select HTML Elements for manipulation
 const gameWinner = document.querySelector('#winner');
 const results = document.querySelector('#results');
 const choices = document.querySelector('#choices');
+const playerScoreDisplay = document.querySelector('#player-score');
+const computerScoreDisplay = document.querySelector('#computer-score');
 
 function player(playerName, playerScore) {
     this.name = playerName;
@@ -23,59 +26,63 @@ function getComputerChoice() {
     }
 }
 
-// Per Specification: Write a function that plays a single round of Rock Paper Scissors
-// Input is Two Parameters - playerSelection and computerSelection
-// Return a string declaring the winner of the round
-// Return a string declaring a tie if it is a tie
-// Return a string indicating player forfeit if something other than rock paper or scissors is input.
 
+// Plays a single round of RPS
 function playRound(playerSelection) {
    
     let computerSelection = getComputerChoice();
     let roundResult;
     
+    // Send the player and computer choices to the page
     choices.querySelector('#computerChoice').textContent = `Computer Chose: ${computerSelection}`;
     choices.querySelector('#playerChoice').textContent = `Player Chose: ${playerSelection}`;
 
+    // Select the result to display on the page based on the player and computer choices
     switch (playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
                 addScore(humanPlayer);
-                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round!`;
             } else if (computerSelection === "paper") {
                 addScore(computerPlayer);
-                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round!`
             } else {
-                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded!`;
             }
             break;
         case "paper":
             if (computerSelection === "rock") {
                 addScore(humanPlayer);
-                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round!`;
             } else if (computerSelection === "scissors") {
                 addScore(computerPlayer);
-                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round!`
             } else {
-                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded!`;
             }
             break;
         case "scissors":
             if (computerSelection === "paper") {
                 addScore(humanPlayer);
-                roundResult = `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Player wins this round!`;
             } else if (computerSelection === "rock") {
                 addScore(computerPlayer);
-                roundResult = `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
+                roundResult = `Computer wins this round!`
             } else {
-                roundResult = `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
+                roundResult = `Tie! No points awarded!`;
             }
             break;
     }
 
+    // Send the result to the page
     results.textContent = roundResult;
     gameWinner.textContent = '';
+
+    // Send the updated scores to the page
+    playerScoreDisplay.textContent = humanPlayer.score;
+    computerScoreDisplay.textContent = computerPlayer.score;
     
+    // Declare winner once one of the players reaches a score of 5
     if (humanPlayer.score == 5 || computerPlayer.score == 5){
         gameWinner.textContent = getWinner(humanPlayer.score, computerPlayer.score);
         humanPlayer.score = 0;
@@ -101,8 +108,8 @@ function game() {
             playRound(playerSelection);
         });
     });
-    
-    
+
+    // Add option to restart the game after a winner has been declared
 }
 
 // Function that will take two scores as input and return which is the winner
