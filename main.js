@@ -48,10 +48,7 @@ function playRound(playerSelection, computerSelection) {
             } else {
                 return "tie";
             }
-        default:
-            return "invalid player input";
     }
-
 }
 
 // Write a function called game() which calls the playRound() function and plays a 5 round
@@ -59,80 +56,46 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        console.log(`\nRound ${i + 1}:`)
 
-        const computerSelection = getComputerChoice();
-        const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors.");
-        if (playerSelection === null) {
-            console.log("Player forfeits game!");
-            return;
-        } else {
-            playerSelection = playerSelection.toLowerCase();
-        }
+    const gameWinner = document.querySelector('#winner');
+    const results = document.querySelector('#results');
+    // When Player clicks button
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', function(e){
+            let playerSelection = e.target.id;
+            let computerSelection = getComputerChoice();
+            let result = playRound(playerSelection, computerSelection);
 
-        let result = playRound(playerSelection, computerSelection);
+            if (result === "win") {
+                roundResult = `Player wins this round! Player Score: ${++playerScore} | Computer Score: ${computerScore}`
+            } else if (result === "lose") {
+                roundResult = `Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`
+            } else {
+                roundResult = `Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`
+            }
 
-        if (result === "win") {
-            console.log(`Player wins this round! Player Score: ${++playerScore} | Computer Score: ${computerScore}`);
-            alert(`Player wins this round! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
-        } else if (result === "lose") {
-            console.log(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
-            alert(`Computer wins this round! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
-        } else if (result === "tie") {
-            console.log(`Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`);
-            alert(`Tie! No points awarded! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
-        } else {
-            console.log(`Invalid Input! The Player forfeits round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`);
-            alert(`Invalid Input! The Player forfeits round! \nPlayer Score: ${playerScore} | Computer Score: ${computerScore}`);
-        }
-    }
+            results.textContent = roundResult;
 
-    // Declare who the winner is
-    console.log(getWinner(playerScore, computerScore));
+            if (playerScore == 5 || computerScore == 5) {
+                gameWinner.textContent = getWinner(playerScore, computerScore);
+            }
+            
+        });
+    });
     
 }
 
 // Function that will take two scores as input and return which is the winner
 function getWinner(playerScore, computerScore) {
-    if (playerScore > computerScore) {
+    if (playerScore == 5) {
         return "Player wins!";
-    } else if (playerScore < computerScore) {
+    } else if (computerScore == 5) {
         return "Computer wins!";
     } else {
-        // Tie breaker
-        tieWinner = tieBreaker();
-        return tieWinner;
+        return;
     }
 }
 
-// Recursively break ties until a winner is decided, then return the winner.
-function tieBreaker() {
-    console.log(`It's a tie! Tie-breaker round!`);
-    alert(`It's a tie! Tie-breaker round!`);
-    
-    const computerSelection = getComputerChoice();
-    const playerSelection = prompt(`Round ${i + 1}\n` + "Choose Your Weapon: Rock, Paper, or Scissors."); 
-    if (playerSelection === null) {
-        return "Player forfeits! Computer wins!";
-    } else {
-        playerSelection = playerSelection.toLowerCase();
-    }
-
-    let result = playRound(playerSelection, computerSelection);
-
-    if (result === "win") {
-        return "Player Wins!";
-    } else if (result === "lose") {
-        return "Computer wins!";
-    } else if (result === "tie") {
-        console.log(`Another tie!`);
-        alert(`Another tie!`);
-        tieBreaker();
-    } else {
-        return "Invalid player input! Computer wins!";
-    }
-}
-
-alert("Welcome to Rock Paper Scissors.\n Open the console to see full game results.");
 game();
+
