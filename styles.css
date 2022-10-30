@@ -13,6 +13,11 @@ button {
     font-size: 20px;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     display: flex;
     font-size: 32px;
@@ -31,9 +36,34 @@ button {
     margin: 20px 0;
 }
 
-#choices {
-    margin-bottom: 20px;
-    min-height: 70px;
+#computer, #player {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 88px;
+    margin-left: 88px;
+    min-height: 22px;
+}
+
+#computer .choice,
+#player .choice {
+    font-size:larger;
+}
+
+
+#choiceContainer {
+    min-height: 140px;
+    width: 375px;
+    border: 2px solid black;
+    align-self: center;
+}
+
+#choiceContainer > p {
+    font-size: 20px;
+}
+
+#winner {
+    font-size: 14px;
+    margin-top: 12px;
 }
 
 #main-image {

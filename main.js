@@ -1,15 +1,21 @@
 // Select HTML Elements for manipulation
-//const gameWinner = document.querySelector('#winner');
 const results = document.querySelector('#results');
-const choices = document.querySelector('#choices');
+const choices = document.querySelector('#choiceContainer');
 const playerScoreDisplay = document.querySelector('#player-score');
 const computerScoreDisplay = document.querySelector('#computer-score');
 
+const computerChoice = choiceContainer.querySelector('#computer > .choice');
+const playerChoice = choiceContainer.querySelector('#player > .choice');
+const winner = choiceContainer.querySelector('#winner');
+
+
+// Create player class
 function player(playerName, playerScore) {
     this.name = playerName;
     this.score = playerScore;
 }
 
+// Add new players
 const humanPlayer = new player("player", 0);
 const computerPlayer = new player("computer", 0);
 
@@ -18,11 +24,11 @@ function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
     switch (choice) {
         case 0:
-            return "rock";
+            return "Rock";
         case 1:
-            return "paper";
+            return "Paper";
         case 2:
-            return "scissors";
+            return "Scissors";
     }
 }
 
@@ -32,48 +38,56 @@ function playRound(playerSelection) {
    
     let computerSelection = getComputerChoice();
     let roundResult;
-    
-    // Send the player and computer choices to the page
-    choices.querySelector('#computerChoice').textContent = `Computer Chose: ${computerSelection}`;
-    choices.querySelector('#playerChoice').textContent = `Player Chose: ${playerSelection}`;
 
     // Select the result to display on the page based on the player and computer choices
     switch (playerSelection) {
-        case "rock":
-            if (computerSelection === "scissors") {
+        case "Rock":
+            if (computerSelection === "Scissors") {
                 addScore(humanPlayer);
                 roundResult = `Player wins this round!`;
-            } else if (computerSelection === "paper") {
+                winner.textContent = "Rock beats Scissors";
+            } else if (computerSelection === "Paper") {
                 addScore(computerPlayer);
                 roundResult = `Computer wins this round!`
+                winner.textContent = "Paper beats Rock";
             } else {
                 roundResult = `Tie! No points awarded!`;
+                winner.textContent = "It's a tie";
             }
             break;
-        case "paper":
-            if (computerSelection === "rock") {
+        case "Paper":
+            if (computerSelection === "Rock") {
                 addScore(humanPlayer);
                 roundResult = `Player wins this round!`;
-            } else if (computerSelection === "scissors") {
+                winner.textContent = "Paper beats Rock";
+            } else if (computerSelection === "Scissors") {
                 addScore(computerPlayer);
                 roundResult = `Computer wins this round!`
+                winner.textContent = "Scissors beats Paper";
             } else {
                 roundResult = `Tie! No points awarded!`;
+                winner.textContent = "It's a tie";
             }
             break;
-        case "scissors":
-            if (computerSelection === "paper") {
+        case "Scissors":
+            if (computerSelection === "Paper") {
                 addScore(humanPlayer);
                 roundResult = `Player wins this round!`;
-            } else if (computerSelection === "rock") {
+                winner.textContent = "Scissors beats Paper";
+            } else if (computerSelection === "Rock") {
                 addScore(computerPlayer);
                 roundResult = `Computer wins this round!`
+                winner.textContent = "Rock beats Scissors";
             } else {
                 roundResult = `Tie! No points awarded!`;
+                winner.textContent = "It's a tie";
             }
             break;
     }
 
+    // Send the player and computer choices to the page
+    computerChoice.textContent = computerSelection;
+    playerChoice.textContent = playerSelection;
 
     // Send the updated scores to the page
     playerScoreDisplay.textContent = humanPlayer.score;
