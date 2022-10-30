@@ -1,4 +1,11 @@
-// Per Specification: Start with getComputerChoice function.
+function player(playerName, playerScore) {
+    this.name = playerName;
+    this.score = playerScore;
+}
+
+const humanPlayer = new player("player", 0);
+const computerPlayer = new player("computer", 0);
+
 // Randomly return either Rock, Paper, or Scissors.
 function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
@@ -18,35 +25,43 @@ function getComputerChoice() {
 // Return a string declaring a tie if it is a tie
 // Return a string indicating player forfeit if something other than rock paper or scissors is input.
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
    
+    let computerSelection = getComputerChoice();
     console.log("Computer Choice: " + computerSelection);
     console.log(`Player Choice: ${playerSelection}`);
+
     
     switch (playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
-                return "win";
+                addScore(humanPlayer);
+                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "paper") {
-                return "lose";
+                addScore(computerPlayer);
+                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return "tie";
+                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
         case "paper":
             if (computerSelection === "rock") {
-                return "win";
+                addScore(humanPlayer);
+                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "scissors") {
-                return "lose";
+                addScore(computerPlayer);
+                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return "tie";
+                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
         case "scissors":
             if (computerSelection === "paper") {
-                return "win";
+                addScore(humanPlayer);
+                return `Player wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             } else if (computerSelection === "rock") {
-                return "lose";
+                addScore(computerPlayer);
+                return `Computer wins this round! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`
             } else {
-                return "tie";
+                return `Tie! No points awarded! Player Score: ${humanPlayer.score} | Computer Score: ${computerPlayer.score}`;
             }
     }
 }
@@ -54,35 +69,35 @@ function playRound(playerSelection, computerSelection) {
 // Write a function called game() which calls the playRound() function and plays a 5 round
 // game, keeping score and reporting the winner or loser at the end.
 function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+
+    let roundResult = "Make a selection to start the game";
+    let playerSelection;
 
     const gameWinner = document.querySelector('#winner');
     const results = document.querySelector('#results');
+    results.textContent = roundResult;
+
+
     // When Player clicks button
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         button.addEventListener('click', function(e){
-            let playerSelection = e.target.id;
-            let computerSelection = getComputerChoice();
-            let result = playRound(playerSelection, computerSelection);
-
-            if (result === "win") {
-                roundResult = `Player wins this round! Player Score: ${++playerScore} | Computer Score: ${computerScore}`
-            } else if (result === "lose") {
-                roundResult = `Computer wins this round! Player Score: ${playerScore} | Computer Score: ${++computerScore}`
-            } else {
-                roundResult = `Tie! No points awarded! Player Score: ${playerScore} | Computer Score: ${computerScore}`
-            }
+            playerSelection = e.target.id;
+            
+            roundResult = playRound(playerSelection);
 
             results.textContent = roundResult;
-
-            if (playerScore == 5 || computerScore == 5) {
-                gameWinner.textContent = getWinner(playerScore, computerScore);
-            }
+            gameWinner.textContent = '';
             
+            if (humanPlayer.score == 5 || computerPlayer.score == 5){
+                gameWinner.textContent = getWinner(humanPlayer.score, computerPlayer.score);
+                humanPlayer.score = 0;
+                computerPlayer.score = 0;
+            }
+
         });
     });
+    
     
 }
 
@@ -95,6 +110,11 @@ function getWinner(playerScore, computerScore) {
     } else {
         return;
     }
+}
+
+// Function to change score of either player or computer
+function addScore(playerName) {
+    playerName.score++;
 }
 
 game();
