@@ -1,12 +1,13 @@
 // Create player class
-function player(playerName, playerScore) {
+function player(playerName, playerScore, playerWins) {
     this.name = playerName;
     this.score = playerScore;
+    this.wins = playerWins;
 }
 
 // Add new players
-const humanPlayer = new player("player", 0);
-const computerPlayer = new player("computer", 0);
+const humanPlayer = new player("player", 0, 0);
+const computerPlayer = new player("computer", 0, 0);
 
 // Randomly return either Rock, Paper, or Scissors.
 function getComputerChoice() {
@@ -106,8 +107,10 @@ function game() {
 // Function that will take two scores as input and return which is the winner
 function getWinner(playerScore, computerScore) {
     if (playerScore == 5) {
+        humanPlayer.wins++;
         return "Player wins the game!";
     } else if (computerScore == 5) {
+        computerPlayer.wins++;
         return "Computer wins the game!";
     } else {
         return;
@@ -129,11 +132,14 @@ function updatePage(roundResult, playerSelection, computerSelection){
     const playerScoreDisplay = document.querySelector('#player-score');
     const computerScoreDisplay = document.querySelector('#computer-score');
 
-    const computerChoice = choiceContainer.querySelector('#computer > .choice');
     const playerChoice = choiceContainer.querySelector('#player > .choice');
+    const computerChoice = choiceContainer.querySelector('#computer > .choice');
 
     const playerImage = document.querySelector('#player-img');
     const computerImage = document.querySelector('#computer-img');
+
+    const totalPlayerWins = document.querySelector('#player-wins');
+    const totalComputerWins = document.querySelector('#computer-wins');
 
     // Reset buttons if they are missing (because we just ended a game and restarted)
     buttons.forEach((button) => {
@@ -163,6 +169,10 @@ function updatePage(roundResult, playerSelection, computerSelection){
     // Declare winner once one of the players reaches a score of 5
     if (humanPlayer.score == 5 || computerPlayer.score == 5){
         results.textContent = getWinner(humanPlayer.score, computerPlayer.score);
+        
+        // Update total wins
+        totalPlayerWins.textContent = humanPlayer.wins;
+        totalComputerWins.textContent = computerPlayer.wins;
 
         // Removes buttons and adds a restart game button
         buttons.forEach((button) => {
