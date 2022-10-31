@@ -32,8 +32,16 @@ button {
 .button-container {
     display: flex;
     justify-content: center;
+    min-height: 47px;
     gap: 25px;
     margin: 20px 0;
+}
+
+button#restart {
+    display: none;
+    width: fit-content;
+    align-self: center;
+    margin-top: 16px;
 }
 
 #computer, #player {

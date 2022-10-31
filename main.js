@@ -1,7 +1,3 @@
-
-
-
-
 // Create player class
 function player(playerName, playerScore) {
     this.name = playerName;
@@ -11,6 +7,7 @@ function player(playerName, playerScore) {
 // Add new players
 const humanPlayer = new player("player", 0);
 const computerPlayer = new player("computer", 0);
+
 
 // Randomly return either Rock, Paper, or Scissors.
 function getComputerChoice() {
@@ -87,22 +84,29 @@ function playRound(playerSelection) {
 function game() {
 
     let gameStartText = "Make a selection to start the game";
-    let playerSelection;
+    let playerSelection = '';
+    let computerSelection = '';
 
-    results.textContent = gameStartText;
+    updatePage(gameStartText, playerSelection, computerSelection);
 
     // When Player clicks button
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
-        button.addEventListener('click', function(e){
-            playerSelection = e.target.id;
-            
-            playRound(playerSelection);
-        });
+        if (button.id != 'restart') {
+            button.addEventListener('click', function(e){
+                playerSelection = e.target.id;
+                
+                playRound(playerSelection);
+            });
+        }
     });
 
     // Add option to restart the game after a winner has been declared
+    if (humanPlayer.score == 5 || computerPlayer.score == 5){
+
+    }
 }
+
 
 // Function that will take two scores as input and return which is the winner
 function getWinner(playerScore, computerScore) {
@@ -115,21 +119,32 @@ function getWinner(playerScore, computerScore) {
     }
 }
 
+
 // Function to change score of either player or computer
 function addScore(playerName) {
     playerName.score++;
 }
 
+
 function updatePage(roundResult, playerSelection, computerSelection){
 
     // Select HTML Elements for manipulation
     const results = document.querySelector('#results');
-    const choices = document.querySelector('#choiceContainer');
+    const buttons = document.querySelectorAll('button');
     const playerScoreDisplay = document.querySelector('#player-score');
     const computerScoreDisplay = document.querySelector('#computer-score');
 
     const computerChoice = choiceContainer.querySelector('#computer > .choice');
     const playerChoice = choiceContainer.querySelector('#player > .choice');
+
+    // Reset buttons if they are missing (because we just ended a game and restarted)
+    buttons.forEach((button) => {
+        if ((button.id == "Rock" || button.id == "Paper" || button.id == "Scissors") && button.style.display == "none") {
+            button.style.display = "inline-block";
+        } else if (button.id == "restart" && button.style.display == "inline-block") {
+            button.style.display = "none";
+        };
+    });
 
     // Send the player and computer choices to the page
     computerChoice.textContent = computerSelection;
@@ -144,6 +159,16 @@ function updatePage(roundResult, playerSelection, computerSelection){
         results.textContent = getWinner(humanPlayer.score, computerPlayer.score);
         humanPlayer.score = 0;
         computerPlayer.score = 0;
+
+        // Removes buttons and adds a restart game button
+        buttons.forEach((button) => {
+            button.style.display = "none";
+
+            if (button.id == "restart") {
+                button.style.display = "inline-block";
+                button.addEventListener('click', game);
+            }
+        });
     } else {
     // Send the result to the page
       results.textContent = roundResult;
@@ -151,4 +176,3 @@ function updatePage(roundResult, playerSelection, computerSelection){
 }
 
 game();
-
