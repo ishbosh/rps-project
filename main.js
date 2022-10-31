@@ -1,12 +1,5 @@
-// Select HTML Elements for manipulation
-const results = document.querySelector('#results');
-const choices = document.querySelector('#choiceContainer');
-const playerScoreDisplay = document.querySelector('#player-score');
-const computerScoreDisplay = document.querySelector('#computer-score');
 
-const computerChoice = choiceContainer.querySelector('#computer > .choice');
-const playerChoice = choiceContainer.querySelector('#player > .choice');
-const winner = choiceContainer.querySelector('#winner');
+
 
 
 // Create player class
@@ -35,7 +28,8 @@ function getComputerChoice() {
 
 // Plays a single round of RPS
 function playRound(playerSelection) {
-   
+
+    const winner = choiceContainer.querySelector('#winner');
     let computerSelection = getComputerChoice();
     let roundResult;
 
@@ -85,23 +79,7 @@ function playRound(playerSelection) {
             break;
     }
 
-    // Send the player and computer choices to the page
-    computerChoice.textContent = computerSelection;
-    playerChoice.textContent = playerSelection;
-
-    // Send the updated scores to the page
-    playerScoreDisplay.textContent = humanPlayer.score;
-    computerScoreDisplay.textContent = computerPlayer.score;
-    
-    // Declare winner once one of the players reaches a score of 5
-    if (humanPlayer.score == 5 || computerPlayer.score == 5){
-        results.textContent = getWinner(humanPlayer.score, computerPlayer.score);
-        humanPlayer.score = 0;
-        computerPlayer.score = 0;
-    } else {
-    // Send the result to the page
-      results.textContent = roundResult;
-    }
+    updatePage(roundResult, playerSelection, computerSelection);
 }
 
 // Write a function called game() which calls the playRound() function and plays a 5 round
@@ -140,6 +118,36 @@ function getWinner(playerScore, computerScore) {
 // Function to change score of either player or computer
 function addScore(playerName) {
     playerName.score++;
+}
+
+function updatePage(roundResult, playerSelection, computerSelection){
+
+    // Select HTML Elements for manipulation
+    const results = document.querySelector('#results');
+    const choices = document.querySelector('#choiceContainer');
+    const playerScoreDisplay = document.querySelector('#player-score');
+    const computerScoreDisplay = document.querySelector('#computer-score');
+
+    const computerChoice = choiceContainer.querySelector('#computer > .choice');
+    const playerChoice = choiceContainer.querySelector('#player > .choice');
+
+    // Send the player and computer choices to the page
+    computerChoice.textContent = computerSelection;
+    playerChoice.textContent = playerSelection;
+
+    // Send the updated scores to the page
+    playerScoreDisplay.textContent = humanPlayer.score;
+    computerScoreDisplay.textContent = computerPlayer.score;
+    
+    // Declare winner once one of the players reaches a score of 5
+    if (humanPlayer.score == 5 || computerPlayer.score == 5){
+        results.textContent = getWinner(humanPlayer.score, computerPlayer.score);
+        humanPlayer.score = 0;
+        computerPlayer.score = 0;
+    } else {
+    // Send the result to the page
+      results.textContent = roundResult;
+    }
 }
 
 game();
