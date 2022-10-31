@@ -129,6 +129,7 @@ function updatePage(roundResult, playerSelection, computerSelection){
     // Select HTML Elements for manipulation
     const results = document.querySelector('#results');
     const buttons = document.querySelectorAll('button');
+
     const playerScoreDisplay = document.querySelector('#player-score');
     const computerScoreDisplay = document.querySelector('#computer-score');
 
@@ -140,6 +141,7 @@ function updatePage(roundResult, playerSelection, computerSelection){
 
     const totalPlayerWins = document.querySelector('#player-wins');
     const totalComputerWins = document.querySelector('#computer-wins');
+    
 
     // Reset buttons if they are missing (because we just ended a game and restarted)
     buttons.forEach((button) => {

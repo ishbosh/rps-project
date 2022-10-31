@@ -84,6 +84,7 @@ button#restart {
     width: 375px;
     border: 2px solid black;
     align-self: center;
+    background-color: rgb(232, 232, 232);
 }
 
 #choiceContainer > p {
