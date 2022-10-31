@@ -11,11 +11,26 @@ button {
     width: 100px;
     padding: 10px;
     font-size: 20px;
+    border-radius: 10px;
 }
 
-.container {
+button:hover {
+    background-color: rgb(250, 230, 206);
+}
+
+button:active {
+    background-color: rgb(243, 207, 164);
+    border-color: azure;
+}
+
+.outer-container {
+    display: flex;
+}
+
+.inner-container {
     display: flex;
     flex-direction: column;
+    min-width: 466px;
 }
 
 .header {
@@ -35,6 +50,12 @@ button {
     min-height: 47px;
     gap: 25px;
     margin: 20px 0;
+}
+
+.image {
+    width: 240px;
+    height: 140px;
+    align-self: flex-end;
 }
 
 button#restart {
@@ -77,4 +98,5 @@ button#restart {
 #main-image {
     align-self: flex-start;
     margin-bottom: 80px;
+
 }

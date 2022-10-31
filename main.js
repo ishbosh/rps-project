@@ -8,7 +8,6 @@ function player(playerName, playerScore) {
 const humanPlayer = new player("player", 0);
 const computerPlayer = new player("computer", 0);
 
-
 // Randomly return either Rock, Paper, or Scissors.
 function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3);
@@ -101,10 +100,6 @@ function game() {
         }
     });
 
-    // Add option to restart the game after a winner has been declared
-    if (humanPlayer.score == 5 || computerPlayer.score == 5){
-
-    }
 }
 
 
@@ -137,6 +132,9 @@ function updatePage(roundResult, playerSelection, computerSelection){
     const computerChoice = choiceContainer.querySelector('#computer > .choice');
     const playerChoice = choiceContainer.querySelector('#player > .choice');
 
+    const playerImage = document.querySelector('#player-img');
+    const computerImage = document.querySelector('#computer-img');
+
     // Reset buttons if they are missing (because we just ended a game and restarted)
     buttons.forEach((button) => {
         if ((button.id == "Rock" || button.id == "Paper" || button.id == "Scissors") && button.style.display == "none") {
@@ -150,6 +148,14 @@ function updatePage(roundResult, playerSelection, computerSelection){
     computerChoice.textContent = computerSelection;
     playerChoice.textContent = playerSelection;
 
+    if (playerSelection == '' || computerSelection == '') {
+        playerImage.src = `images/default.png`
+        computerImage.src = `images/default.png`
+    } else {
+        playerImage.src = `images/${playerSelection}.png`
+        computerImage.src = `images/${computerSelection}.png`
+    }
+
     // Send the updated scores to the page
     playerScoreDisplay.textContent = humanPlayer.score;
     computerScoreDisplay.textContent = computerPlayer.score;
@@ -157,8 +163,6 @@ function updatePage(roundResult, playerSelection, computerSelection){
     // Declare winner once one of the players reaches a score of 5
     if (humanPlayer.score == 5 || computerPlayer.score == 5){
         results.textContent = getWinner(humanPlayer.score, computerPlayer.score);
-        humanPlayer.score = 0;
-        computerPlayer.score = 0;
 
         // Removes buttons and adds a restart game button
         buttons.forEach((button) => {
@@ -166,13 +170,24 @@ function updatePage(roundResult, playerSelection, computerSelection){
 
             if (button.id == "restart") {
                 button.style.display = "inline-block";
-                button.addEventListener('click', game);
+                button.addEventListener('click', restartGame);
             }
         });
     } else {
     // Send the result to the page
       results.textContent = roundResult;
     }
+}
+
+function restartGame() {
+    let gameStartText = "Make a selection to start the game";
+    let playerSelection = '';
+    let computerSelection = '';
+
+    humanPlayer.score = 0;
+    computerPlayer.score = 0;
+
+    updatePage(gameStartText, playerSelection, computerSelection);
 }
 
 game();

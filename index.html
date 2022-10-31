@@ -14,34 +14,39 @@
             </div>
             <div>Computer Score: <span id="computer-score">0</span></div>
         </div>
-        <div class="container">
-
-            <div class="game-container">
-                
-                <div id="results"></div>
-                
-                <div class="button-container">
-                    <button id="Rock">Rock</button>
-                    <button id="Paper">Paper</button>
-                    <button id="Scissors">Scissors</button>
+        <div class="outer-container">
+            <img id="player-img" class="image" src="images/default.png">
+            <div class="inner-container">
+    
+                <div class="game-container">
+                    
+                    <div id="results"></div>
+                    
+                    <div class="button-container">
+                        <button id="Rock">Rock</button>
+                        <button id="Paper">Paper</button>
+                        <button id="Scissors">Scissors</button>
+                    </div>
+                    
+                    <div id="winner"></div>
                 </div>
-                
-                <div id="winner"></div>
+                <div id="choiceContainer">
+                    <p>Choose your weapon!</p>
+                    
+                    <div id="player">Player Chose: 
+                        <div class="choice"></div>
+                    </div>
+                    <div id="computer">Computer Chose: 
+                        <div class="choice"></div>
+                    </div>
+                    
+                    <div id="winner"></div>
+                </div>
             </div>
-            <div id="choiceContainer">
-                <p>Choose your weapon!</p>
-                
-                <div id="player">Player Chose: 
-                    <div class="choice"></div>
-                </div>
-                <div id="computer">Computer Chose: 
-                    <div class="choice"></div>
-                </div>
-                
-                <div id="winner"></div>
-            </div>
-            <button id="restart">Restart Game</button>
+            <img id="computer-img" class="image" src="images/default.png">
         </div>
+        <div>First to 5 points Wins</div>
+        <button id="restart">Restart Game</button>
 
 
     </body>
